@@ -15,7 +15,7 @@ public interface ContentService {
     ResultCreative<Content> addContent(Authentication auth, String boostId, Content payload)
             throws APIUnauthorizedException, APIServerException, APIClientException;
 
-    ResultsData<Content> updateContent(Authentication auth, String boostId, Content payload)
+    void updateContent(Authentication auth, String boostId, Content payload)
             throws APIUnauthorizedException, APIServerException, APIClientException;
 
     ResultsData<Content> listContents(Authentication auth, Map<String, String> filter)

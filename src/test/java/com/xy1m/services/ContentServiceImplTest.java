@@ -58,9 +58,7 @@ public class ContentServiceImplTest {
                 .id("4155513")
                 .enabled(EnumEnabled.on)
                 .build();
-        ResultsData<Content> result = revContent.contentService().updateContent(auth, BOOST_ID, payload);
-        System.out.println(objectMapper.writeValueAsString(result));
-        Assert.assertNotNull(result);
+        revContent.contentService().updateContent(auth, BOOST_ID, payload);
     }
 
     @Test

@@ -50,13 +50,13 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
-    public ResultsData<Content> updateContent(Authentication auth, String boostId, Content payload)
+    public void updateContent(Authentication auth, String boostId, Content payload)
             throws APIUnauthorizedException, APIServerException, APIClientException {
         if (performValidations) {
             checkArgument(isNotBlank(payload.getId()), "ID is required");
         }
         String accessToken = auth.getToken().getAccessTokenForHeader();
-        return endpoint.updateContent(accessToken, boostId, payload);
+        endpoint.updateContent(accessToken, boostId, payload);
     }
 
     @Override

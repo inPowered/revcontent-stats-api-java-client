@@ -27,9 +27,9 @@ public interface ContentEndpoint {
 
     @POST(Paths.BACKSTAGE_API_PATH_PREFIX + "/boosts/{boost_id}/content")
     @Headers("ContentAddRequest-Type: application/json")
-    ResultsData<Content> updateContent(@Header("Authorization") String authToken,
-                                       @Path("boost_id") String boostId,
-                                       @Body Content payload)
+    Object updateContent(@Header("Authorization") String authToken,
+                                      @Path("boost_id") String boostId,
+                                      @Body Content payload)
             throws APIUnauthorizedException, APIServerException, APIClientException;
 
     @GET(Paths.BACKSTAGE_API_PATH_PREFIX + "/boosts/content")
