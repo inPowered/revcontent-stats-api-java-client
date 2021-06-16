@@ -2,11 +2,13 @@ package com.xy1m.model.boost;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.xy1m.model.EnumEnabled;
 import com.xy1m.model.EnumOptimize;
 import com.xy1m.model.EnumStatus;
 import com.xy1m.model.conversion.Conversion;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -403,6 +405,17 @@ class Boost {
 
     public void setPixelUrl(String pixelUrl) {
         this.pixelUrl = pixelUrl;
+    }
+
+    @JsonSetter("dma_codes")
+    public void setDmaCodesStr(String dmaCodesStr) {
+        // When returned the dma codes are comma separated values format instead of Array.
+        if (dmaCodesStr != null) {
+            this.dmaCodes = Arrays.asList(dmaCodesStr.split(","));
+        }
+        else {
+            this.dmaCodes = null;
+        }
     }
 
     @Override
