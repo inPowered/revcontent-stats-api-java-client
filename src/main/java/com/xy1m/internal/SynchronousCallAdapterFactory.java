@@ -74,7 +74,7 @@ public class SynchronousCallAdapterFactory extends CallAdapter.Factory {
                 }
                 catch (IOException e) {
                     logger.error(e);
-                    throw new APIServerException();
+                    throw new APIServerException(e.getLocalizedMessage());
                 }
 
                 return obj;
