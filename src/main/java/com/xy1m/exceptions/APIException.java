@@ -15,9 +15,8 @@ public abstract class APIException extends RuntimeException {
         this.error = error;
     }
 
-    public APIException(APIError error, String message, Throwable t, Object... params) {
-        super(String.format(message + parseError(error), params), t);
-        this.error = error;
+    public APIException(Throwable t, String message, Object... params) {
+        super(String.format(message, params), t);
     }
 
     private static String parseError(APIError error) {

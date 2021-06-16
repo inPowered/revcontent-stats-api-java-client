@@ -60,21 +60,22 @@ public class SynchronousCallAdapterFactory extends CallAdapter.Factory {
                     }
                     else {
                         int responseCode = response.code();
+
                         if (responseCode == UNAUTHORIZED_HTTP_STATUS_CODE) {
                             throw new APIUnauthorizedException();
-
                         }
-                        else if (responseCode >= BAD_REQUEST_HTTP_STATUS_CODE && responseCode < INTERNAL_SERVER_ERROR_HTTP_STATUS_CODE) {
+
+                        if (responseCode >= BAD_REQUEST_HTTP_STATUS_CODE && responseCode < INTERNAL_SERVER_ERROR_HTTP_STATUS_CODE) {
                             throw new APIClientException(responseCode, parseError(response));
                         }
 
-                        throw new APIServerException(responseCode);
+                        throw new APIServerException(responseCode, parseError(response));
                     }
 
                 }
                 catch (IOException e) {
                     logger.error(e);
-                    throw new APIServerException(e.getLocalizedMessage());
+                    throw new APIServerException(e);
                 }
 
                 return obj;
@@ -82,7 +83,7 @@ public class SynchronousCallAdapterFactory extends CallAdapter.Factory {
         };
     }
 
-    private APIError parseError(Response errorResponse) {
+    private APIError parseError(Response<?> errorResponse) {
         ResponseBody errorBody = errorResponse.errorBody();
         try {
             return objectMapper.readValue(errorBody.bytes(), APIError.class);
